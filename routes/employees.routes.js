@@ -5,7 +5,7 @@ const Employee = require('../models/employee.model');
 // get all employees
 router.get('/employees', async (req, res) => {
   try {
-    res.json(await Employee.find());
+    res.json(await Employee.find().populate('department'));
   } catch (err) {
     res.status(500).json({ message: err.message || err });
   }
@@ -19,7 +19,7 @@ router.get('/employees/random', async (req, res) => {
       return res.status(404).json({ message: 'Not found' });
     }
     const rand = Math.floor(Math.random() * count);
-    const emp = await Employee.findOne().skip(rand);
+    const emp = await Employee.findOne().skip(rand).populate('department');
     res.json(emp);
   } catch (err) {
     res.status(500).json({ message: err.message || err });
@@ -29,7 +29,7 @@ router.get('/employees/random', async (req, res) => {
 // get employee by id
 router.get('/employees/:id', async (req, res) => {
   try {
-    const emp = await Employee.findById(req.params.id);
+    const emp = await Employee.findById(req.params.id).populate('department');
     if (!emp) res.status(404).json({ message: 'Not found' });
     else res.json(emp);
   } catch (err) {

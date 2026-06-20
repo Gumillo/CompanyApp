@@ -21,7 +21,7 @@ app.use((req, res) => {
 });
 
 // Connect to DB
-mongoose.connect('mongodb://0.0.0.0:27017/companyDB');
+mongoose.connect('mongodb+srv://user1:GD43MkugeaLM7eZs@cluster0.ooqok9u.mongodb.net/companyDB?retryWrites=true&w=majority&appName=Cluster0');
 const db = mongoose.connection;
 
 db.once('open', () => {

@@ -21,14 +21,18 @@ app.use((req, res) => {
 });
 
 // Connect to DB
-mongoose.connect('mongodb+srv://user1:GD43MkugeaLM7eZs@cluster0.ooqok9u.mongodb.net/companyDB?retryWrites=true&w=majority&appName=Cluster0');
-const db = mongoose.connection;
+if (process.env.NODE_ENV !== 'test') {
+  mongoose.connect('mongodb+srv://user1:GD43MkugeaLM7eZs@cluster0.ooqok9u.mongodb.net/companyDB?retryWrites=true&w=majority&appName=Cluster0');
+  const db = mongoose.connection;
 
-db.once('open', () => {
-  console.log('Connected to the database');
-});
-db.on('error', err => console.log('Error ' + err));
+  db.once('open', () => {
+    console.log('Connected to the database');
+  });
+  db.on('error', err => console.log('Error ' + err));
+}
 
-app.listen('8000', () => {
+const server = app.listen('8000', () => {
   console.log('Server is running on port: 8000');
 });
+
+module.exports = server;

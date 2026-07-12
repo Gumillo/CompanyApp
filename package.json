@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test": "mocha \"./**/*.test.js\" --ignore \"node_modules/**\"",
+    "test:watch": "onchange \"./**/*.js\" -i -k -- npm run test"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -12,5 +14,10 @@
     "mongodb": "^4.17.0",
     "mongoose": "^9.7.1",
     "nodemon": "^1.19.1"
+  },
+  "devDependencies": {
+    "chai": "^6.2.2",
+    "mocha": "^11.7.6",
+    "onchange": "^7.1.0"
   }
 }

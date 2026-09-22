@@ -14,10 +14,9 @@ describe('Employee', () => {
 
     for (let param of cases) {
       const emp = new Employee(param);
-
-      emp.validateSync(err => {
-        expect(err.errors).to.exist;
-      });
+      const err = emp.validateSync();
+      expect(err).to.exist;
+      expect(err.errors).to.exist;
     }
   });
 
@@ -25,10 +24,9 @@ describe('Employee', () => {
     const cases = [{}, []];
     for (let firstName of cases) {
       const emp = new Employee({ firstName, lastName: 'Doe', department: 'IT' });
-  
-      emp.validateSync(err => {
-        expect(err.errors.firstName).to.exist;
-      });
+      const err = emp.validateSync();
+      expect(err).to.exist;
+      expect(err.errors.firstName).to.exist;
     }
   });
 
@@ -36,10 +34,9 @@ describe('Employee', () => {
     const cases = [{}, []];
     for (let lastName of cases) {
       const emp = new Employee({ firstName: 'John', lastName, department: 'IT' });
-  
-      emp.validateSync(err => {
-        expect(err.errors.lastName).to.exist;
-      });
+      const err = emp.validateSync();
+      expect(err).to.exist;
+      expect(err.errors.lastName).to.exist;
     }
   });
 
@@ -47,10 +44,9 @@ describe('Employee', () => {
     const cases = [{}, []];
     for (let department of cases) {
       const emp = new Employee({ firstName: 'John', lastName: 'Doe', department });
-  
-      emp.validateSync(err => {
-        expect(err.errors.department).to.exist;
-      });
+      const err = emp.validateSync();
+      expect(err).to.exist;
+      expect(err.errors.department).to.exist;
     }
   });
 
@@ -62,10 +58,8 @@ describe('Employee', () => {
 
     for (let param of cases) {
       const emp = new Employee(param);
-
-      emp.validateSync(err => {
-        expect(err).to.not.exist;
-      });
+      const err = emp.validateSync();
+      expect(err).to.not.exist;
     }
   });
 

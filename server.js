@@ -22,7 +22,8 @@ app.use((req, res) => {
 
 // Connect to DB
 if (process.env.NODE_ENV !== 'test') {
-  mongoose.connect('mongodb+srv://user1:GD43MkugeaLM7eZs@cluster0.ooqok9u.mongodb.net/companyDB?retryWrites=true&w=majority&appName=Cluster0');
+  const dbURI = process.env.DB_URL || `mongodb+srv://user1:${process.env.DB_PASS}@cluster0.ooqok9u.mongodb.net/companyDB?retryWrites=true&w=majority&appName=Cluster0`;
+  mongoose.connect(dbURI);
   const db = mongoose.connection;
 
   db.once('open', () => {
